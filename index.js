@@ -3,7 +3,9 @@ var pumpify = require('pumpify')
 var through = require('through2')
 
 module.exports = function(func) {
-  var compiled = new Function(func + ';\nreturn this;')
+  var funcStr = func + ';\n return this;'
+  if (func[0] === '{') funcStr = 'var that = ' + func + ';\n return that;'
+  var compiled = new Function(funcStr)
   
   return pumpify.obj(ldj.parse(), through.obj(transform))
   
