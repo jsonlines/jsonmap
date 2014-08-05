@@ -8,7 +8,7 @@ you must pipe newline-delimited JSON data in (one JSON stringified object per li
 
 ## installation
 
-```
+```BASH
 $ npm install jsonmap -g
 ```
 
@@ -18,7 +18,7 @@ $ npm install jsonmap -g
 
 there are two 'modes', the first is where you modify `this`:
 
-```
+```BASH
 $ echo '{"foo": "bar"}\n{"baz": "taco"}' | jsonmap "this.pizza = 1"
 {"foo":"bar","pizza":1}
 {"baz":"taco","pizza":1}
@@ -26,6 +26,7 @@ $ echo '{"foo": "bar"}\n{"baz": "taco"}' | jsonmap "this.pizza = 1"
 
 the second mode is where you return a new object:
 
+```BASH
 $ echo '{"foo": "bar", "cat": "yes"}\n{"baz": "taco", "cat": "yes"}' | jsonmap "{cat: this.cat}"
 {"cat":"yes"}
 {"cat":"yes"}
