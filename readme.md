@@ -31,3 +31,19 @@ $ echo '{"foo": "bar", "cat": "yes"}\n{"baz": "taco", "cat": "yes"}' | jsonmap "
 {"cat":"yes"}
 {"cat":"yes"}
 ```
+
+if your code gets too complex and you'd rather use an external file you can also just specify a module to get required:
+
+```BASH
+$ echo '{"foo": "bar"}\n{"baz": "taco"}' | jsonmap --file=transform.js
+{"foo":"bar","pizza":1}
+{"baz":"taco","pizza":1}
+```
+
+the above will work if `transform.js` has the following contents:
+
+```js
+module.exports = function() {
+  this.pizza = 1
+}
+```
