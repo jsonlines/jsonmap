@@ -5,6 +5,9 @@
   "bin": {
     "jsonmap": "cli.js"
   },
+  "scripts": {
+    "test": "cat test.json | node cli.js \"{dog: this.dog}\""
+  },
   "main": "index.js",
   "author": "max ogden",
   "license": "BSD",
