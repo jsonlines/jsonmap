@@ -10,9 +10,18 @@ module.exports = function(func) {
 module.exports.createFunctionStream = createFunctionStream
 
 function createFunctionStream(func) {
-  var funcStr = func + ';\n return this;'
-  if (func[0] === '{') funcStr = 'var that = ' + func + ';\n return that;'
-  var compiled = new Function(funcStr)
+  var compiled;
+  if(typeof func !== 'function') {
+    var funcStr = func + ';\n return this;'
+    if (func[0] === '{') funcStr = 'var that = ' + func + ';\n return that;'
+    compiled = new Function(funcStr)
+  }
+  else {
+    compiled = function(obj) {
+      return func.call(this, obj)
+        || this; // in case the function just mutates `this` w/o returning.
+    };
+  }
   
   function transform(obj, enc, next) {
     var out = compiled.call(obj, obj)
