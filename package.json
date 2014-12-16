@@ -6,7 +6,7 @@
     "jsonmap": "cli.js"
   },
   "scripts": {
-    "test": "node ./test.js"
+    "test": "node ./test"
   },
   "main": "index.js",
   "author": "max ogden",
