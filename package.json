@@ -6,7 +6,7 @@
     "jsonmap": "cli.js"
   },
   "scripts": {
-    "test": "cat test.json | node cli.js \"{dog: this.dog}\""
+    "test": "node ./test.js"
   },
   "main": "index.js",
   "author": "max ogden",
