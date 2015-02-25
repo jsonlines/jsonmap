@@ -11,6 +11,10 @@ exec('cat test.json | node ../cli.js --file=test-transform.js',
 exec('cat test.json | node ../cli.js \"{dog: this.dog}\" | node ../cli.js --file=test-transform2.js',
   expect('{"dog":6}\n{"dog":7}\n'));
 
+exec('cat test.json | node ../cli.js \"{dog: this.dog}\" | node ../cli.js --file=test-transform3.js --through',
+  expect('{"dog":5}\n{"dog":6}\n{"dog":7}\n'));
+
+
 function expect(output) {
   function done(err, stdout, stderr) {
     if(stdout !== output) {
@@ -19,6 +23,6 @@ function expect(output) {
     console.log(stdout);
     if(err) { throw err; }
   }
-  
+
   return done;
 }

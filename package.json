@@ -1,7 +1,7 @@
 {
   "name": "jsonmap",
   "description": "streaming command line newline-delimited json transformer utility",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "bin": {
     "jsonmap": "cli.js"
   },

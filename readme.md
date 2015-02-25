@@ -47,3 +47,26 @@ module.exports = function() {
   this.pizza = 1
 }
 ```
+
+if you want to provide a [through2](https://github.com/rvagg/through2) function in a file for more control, or async, you can
+
+```BASH
+$ echo '{"foo": "bar"}\n{"baz": "taco"}' | jsonmap --file=transform.js --through
+{"foo":"bar","pizza":1}
+{"baz":"taco","pizza":1}
+```
+
+the above will work if `transform.js` has the following contents:
+
+```js
+module.exports = function(obj, enc, next) {
+  var self = this;
+  if(obj.foo === 'bar') return next() // skip the bar
+  process.nextTick(function(){
+    self.push({ count: obj.pizza })
+    next()
+  })
+}
+```
+
+
