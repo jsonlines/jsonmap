@@ -48,7 +48,7 @@ module.exports = function() {
 }
 ```
 
-if you have es6 enabled on your platform, template strings will work as well
+if you have es6 template strings enabled on your platform (e.g. iojs), template strings will work as well
 
 ```BASH
 $ echo '{"meal": "pizza"}\n{"meal": "taco"}' | jsonmap '`i love ${this.meal}`'
