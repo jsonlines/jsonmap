@@ -47,3 +47,11 @@ module.exports = function() {
   this.pizza = 1
 }
 ```
+
+if you have es6 enabled on your platform, template strings will work as well
+
+```BASH
+$ echo '{"meal": "pizza"}\n{"meal": "taco"}' | jsonmap '`i love ${this.meal}`'
+"i love pizza"
+"i love taco"
+```
