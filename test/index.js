@@ -11,8 +11,10 @@ exec('cat test.json | node ../cli.js --file=test-transform.js',
 exec('cat test.json | node ../cli.js \"{dog: this.dog}\" | node ../cli.js --file=test-transform2.js',
   expect('{"dog":6}\n{"dog":7}\n'));
 
-exec('cat test.json | node ../cli.js \'\`${this.dog} dogs\`\'',
-  expect('"5 dogs"\n"6 dogs"\n'));
+supportsTemplateStrings(function () {
+  exec('cat test.json | node ../cli.js \'\`${this.dog} dogs\`\'',
+    expect('"5 dogs"\n"6 dogs"\n'));
+})
 
 function expect(output) {
   function done(err, stdout, stderr) {
@@ -24,4 +26,11 @@ function expect(output) {
   }
   
   return done;
+}
+
+function supportsTemplateStrings(cb) {
+  try {
+    eval('``');
+    cb();
+  } catch(e) {}
 }
