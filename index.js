@@ -14,7 +14,7 @@ function createFunctionStream(func, opts) {
   var compiled;
   if(typeof func !== 'function') {
     var funcStr = func + ';\n return this;'
-    if (func[0] === '{') funcStr = 'var that = ' + func + ';\n return that;'
+    if (func[0] === '{' || func[0] === '`') funcStr = 'var t = ' + func + ';\n return t;'
     compiled = new Function(funcStr)
   }
   else if (opts.through) {

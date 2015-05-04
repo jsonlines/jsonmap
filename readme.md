@@ -48,6 +48,14 @@ module.exports = function() {
 }
 ```
 
+if you have es6 template strings enabled on your platform (e.g. iojs), template strings will work as well
+
+```BASH
+$ echo '{"meal": "pizza"}\n{"meal": "taco"}' | jsonmap '`i love ${this.meal}`'
+"i love pizza"
+"i love taco"
+```
+
 if you want to provide a [through2](https://github.com/rvagg/through2) function in a file for more control, or async, you can
 
 ```BASH
