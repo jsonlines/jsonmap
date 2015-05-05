@@ -9,6 +9,6 @@ var transform = args._[0]
 if (args.file) transform = require(path.resolve(process.cwd(), args.file))
 
 process.stdin
-  .pipe(map(transform))
+  .pipe(map(transform, args))
   .pipe(ldj.serialize())
   .pipe(process.stdout)
