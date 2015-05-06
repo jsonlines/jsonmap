@@ -77,4 +77,6 @@ module.exports = function(obj, enc, next) {
 }
 ```
 
+you disable JSON parsing (to e.g. process a file line by line as JS strings) by passing `jsonmap --no-parse`
+
 

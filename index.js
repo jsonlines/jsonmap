@@ -1,33 +1,33 @@
-var ldj = require('ldjson-stream')
+var ndjson = require('ndjson')
 var pumpify = require('pumpify')
 var through = require('through2')
+var split = require('split2')
 
 module.exports = function(func, opts) {
+  if (!opts) opts = {}
   var transform = createFunctionStream(func, opts)
-  return pumpify.obj(ldj.parse(), transform)
+  if (opts.parse === false) return pumpify.obj(split(), transform)
+  return pumpify.obj(ndjson.parse(), transform)
 }
 
 module.exports.createFunctionStream = createFunctionStream
 
-function createFunctionStream(func, opts) {
-  if (!opts) opts = {};
-  var compiled;
-  if(typeof func !== 'function') {
+function createFunctionStream (func, opts) {
+  if (!opts) opts = {}
+  var compiled
+  if (typeof func !== 'function') {
     var funcStr = func + ';\n return this;'
     if (func[0] === '{' || func[0] === '`') funcStr = 'var t = ' + func + ';\n return t;'
     compiled = new Function(funcStr)
-  }
-  else if (opts.through) {
+  } else if (opts.through) {
     return through.obj(func)
-  }
-  else {
-    compiled = function(obj) {
-      return func.call(this, obj)
-        || this; // in case the function just mutates `this` w/o returning.
-    };
+  } else {
+    compiled = function (obj) {
+      return func.call(this, obj) || this // in case the function just mutates `this` w/o returning.
+    }
   }
 
-  function transform(obj, enc, next) {
+  function transform (obj, enc, next) {
     var out = compiled.call(obj, obj)
     this.push(out)
     next()

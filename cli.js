@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 var map = require('./')
-var ldj = require('ldjson-stream')
+var ndjson = require('ndjson')
 var args = require('minimist')(process.argv.slice(2))
 var path = require('path')
 
@@ -10,5 +10,5 @@ if (args.file) transform = require(path.resolve(process.cwd(), args.file))
 
 process.stdin
   .pipe(map(transform, args))
-  .pipe(ldj.serialize())
+  .pipe(ndjson.serialize())
   .pipe(process.stdout)
