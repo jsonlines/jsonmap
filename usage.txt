@@ -1,10 +1,10 @@
-json-map
+jsonmap
 
 streaming command line newline-delimited json transformer utility
 
 Usage:
 
-  json-map "<expression>"
+  jsonmap "<expression>"
   
 Options
 
@@ -14,4 +14,4 @@ Options
 
 Example
 
-  cat foo.json | json-map "this.foo = bar"
+  cat foo.json | jsonmap "this.foo = bar"
