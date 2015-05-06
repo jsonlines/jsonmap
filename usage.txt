@@ -1,0 +1,17 @@
+json-map
+
+streaming command line newline-delimited json transformer utility
+
+Usage:
+
+  json-map "<expression>"
+  
+Options
+
+  --no-parse     treats incoming data as newline separated strings, skips JSON.parse
+  --file         load a file as a transform instead of using "<expression>"
+  --through      boolean, default false, treat file/expression as a through stream
+
+Example
+
+  cat foo.json | json-map "this.foo = bar"
