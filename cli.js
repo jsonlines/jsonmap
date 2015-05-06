@@ -6,7 +6,7 @@ var args = require('minimist')(process.argv.slice(2))
 var path = require('path')
 var fs = require('fs')
 
-var usage = fs.readFileSync('./usage.txt').toString()
+var usage = fs.readFileSync(__dirname + '/usage.txt').toString()
 
 var transform = args._[0]
 if (args.file) transform = require(path.resolve(process.cwd(), args.file))
