@@ -11,24 +11,23 @@ module.exports = function(func, opts) {
 }
 
 module.exports.createFunctionStream = createFunctionStream
-
 function createFunctionStream (func, opts) {
   if (!opts) opts = {}
   var compiled
   if (typeof func !== 'function') {
     var funcStr = func + ';\n return this;'
     if (func[0] === '{' || func[0] === '`') funcStr = 'var t = ' + func + ';\n return t;'
-    compiled = new Function(funcStr)
+    compiled = new Function('require', '_', funcStr)
   } else if (opts.through) {
     return through.obj(func)
   } else {
-    compiled = function (obj) {
-      return func.call(this, obj) || this // in case the function just mutates `this` w/o returning.
+    compiled = function (require, obj) {
+      return func.call(obj, require, obj) || this // in case the function just mutates `this` w/o returning.
     }
   }
 
   function transform (obj, enc, next) {
-    var out = compiled.call(obj, obj)
+    var out = compiled.call(obj, require, obj)
     this.push(out)
     next()
   }

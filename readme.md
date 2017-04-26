@@ -14,7 +14,7 @@ $ npm install jsonmap -g
 
 ## usage
 
-`this` will be each line of JSON that gets parsed out of the incoming newline-delimited json stream
+`this` will be each line of JSON that gets parsed out of the incoming newline-delimited json stream. you can also use `_` as a shorthand for `this`, and you are allowed to `require` things.
 
 there are two 'modes', the first is where you modify `this`:
 
