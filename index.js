@@ -28,7 +28,7 @@ function createFunctionStream (func, opts) {
 
   function transform (obj, enc, next) {
     var out = compiled.call(obj, require, obj)
-    this.push(out)
+    if (out) this.push(out)
     next()
   }
 
